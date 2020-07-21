@@ -366,7 +366,7 @@ function share(type) {
         // 'olive%20grey39%20orange1'.replace(/%20/g, " ")
         // console.log('http://127.0.0.1:5500/?msg=' + decryptInput.value.replace(/\s/g, '%20'))
 
-        link = 'http://localhost:5500/?msg=' + decryptInput.value.replace(/\s/g, '%20');
+        link = 'https://my-encryption.github.io/?msg=' + decryptInput.value.replace(/\s/g, '%20');
 
 
 
@@ -383,7 +383,7 @@ function share(type) {
         // console.log('share code url')
         // console.log('http://127.0.0.1:5500/?code=' + code.join("%20"))
 
-        link = 'http://localhost:5500/?code=' + code.join("%20");
+        link = 'https://my-encryption.github.io/?code=' + code.join("%20");
 
         // console.log('http://127.0.0.1:5500/?code=' + getAllUrlParams().code.replace(/\s/g, '%20'))
     }
