@@ -8,6 +8,7 @@ const sendBtn = document.getElementById('send-btn')
 const encryptInput = document.getElementById('encrypt-input')
 const decryptInput = document.getElementById('decrypt-input')
 var code = localStorage.getItem('code') ? JSON.parse(localStorage.getItem('code')) : [];
+var chatHistory = localStorage.getItem('chat') ? JSON.parse(localStorage.getItem('chat')) : [];
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -157,15 +158,17 @@ function encrypt() {
 function toScreen(f) {
     var p = document.createElement("p")
 
-    
-     // go to left side
-    if(f == 'send') {
+
+    // go to left side
+    if (f == 'send') {
         p.innerHTML = encryptInput.value;
+        p.setAttribute("class", "send");
     }
-    
+
     // go to right side
-    else if (f == 'receive'){
+    else if (f == 'receive') {
         p.innerHTML = decryptedArr.join("");
+        p.setAttribute("class", "receive");
     }
 
     // var input = document.createElement("input");
@@ -174,7 +177,7 @@ function toScreen(f) {
 
     chat.appendChild(p);
     // chat.appendChild(input);
-    chat.appendChild(document.createElement("br"));
+    // chat.appendChild(document.createElement("br"));
 }
 
 function decrypt() {
@@ -308,7 +311,7 @@ if (getAllUrlParams().msg) {
         decryptInput.value = getAllUrlParams().msg;
     }
 
-   
+
     // !!!!!!!!!!!!!!!!!activate this when it's on its own domain
     // window.history.replaceState({}, document.title, "/");
 }
@@ -380,3 +383,48 @@ function copyStringToClipboard(str) {
     document.body.removeChild(el);
 }
 
+function saveChat() {
+    for (var i = 0; i < chat.getElementsByTagName('p').length; i++) {
+        // console.log(chat.getElementsByTagName('p')[i].innerText)
+
+        if (chat.getElementsByTagName('p')[i].className == 'send') {
+            //write a double arr with 0 (main user)
+            chatHistory.push([chat.getElementsByTagName('p')[i].innerText, 0])
+        }
+        else {
+            //write a double arr with 1 (other user)
+            chatHistory.push([chat.getElementsByTagName('p')[i].innerText, 1])
+        }
+
+
+        localStorage.setItem('chat', JSON.stringify(chatHistory));
+    }
+    console.log(chatHistory)
+}
+
+// if chatHistory exists, bring it up
+// wait, how does it know which is the right and left sides of the chat
+// use a double arr? message then user 0 and 1
+if (localStorage.getItem('chat')) {
+    console.log('chat exists')
+
+    for (var i = 0; i < chatHistory.length; i++) {
+        var j;
+
+        var p = document.createElement("p")
+
+        // [i][j] if j is 0 send to left. if 1 send to right
+        if (chatHistory[i][1] == 0) {
+            p.innerHTML = chatHistory[i][0];
+            p.setAttribute("class", "send");
+        }
+        else if (chatHistory[i][1] == 1) {
+            p.innerHTML = chatHistory[i][0];
+            p.setAttribute("class", "receive");
+        }
+
+        // p.setAttribute("class", "send");
+
+        chat.appendChild(p);
+    }
+}
