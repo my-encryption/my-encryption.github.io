@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- <h1>What is a time-sensitive code?</h1>
+    <p>Allow your receipient to only view your message at a specific time of the day.</p> -->
+
+    <h2>Cryptic</h2>
+
+    <div id="encrypt">
+        <textarea id="encrypt-input" rows="5" cols="60" name="description"></textarea>
+
+        <br>
+
+        <button onclick="encrypt()">
+            encrypt
+        </button>
+    </div>
+
+    <div id="decrypt">
+        <textarea id="decrypt-input" rows="5" cols="60" name="description"></textarea>
+    </div>
+
+    <button onclick="decrypt()">
+        decrypt
+    </button>
+
+    <button onclick="share('msg')">
+        share
+    </button>
+
+    <p>message copied to clipboard</p>
+
+
+    <p>Create your own, or choose from a template below:</p>
+    <ul>
+        <li><button onclick="category('animals')">Animals</button></li>
+        <li><button onclick="category('colours')">Colours</button></li>
+    </ul>
+
+    <div id="inputs"><label>a</label><input type="text" id="char-0"><br><label>b</label><input type="text"
+            id="char-1"><br><label>c</label><input type="text" id="char-2"><br><label>d</label><input type="text"
+            id="char-3"><br><label>e</label><input type="text" id="char-4"><br><label>f</label><input type="text"
+            id="char-5"><br><label>g</label><input type="text" id="char-6"><br><label>h</label><input type="text"
+            id="char-7"><br><label>i</label><input type="text" id="char-8"><br><label>j</label><input type="text"
+            id="char-9"><br><label>k</label><input type="text" id="char-10"><br><label>l</label><input type="text"
+            id="char-11"><br><label>m</label><input type="text" id="char-12"><br><label>n</label><input type="text"
+            id="char-13"><br><label>o</label><input type="text" id="char-14"><br><label>p</label><input type="text"
+            id="char-15"><br><label>q</label><input type="text" id="char-16"><br><label>r</label><input type="text"
+            id="char-17"><br><label>s</label><input type="text" id="char-18"><br><label>t</label><input type="text"
+            id="char-19"><br><label>u</label><input type="text" id="char-20"><br><label>v</label><input type="text"
+            id="char-21"><br><label>w</label><input type="text" id="char-22"><br><label>x</label><input type="text"
+            id="char-23"><br><label>y</label><input type="text" id="char-24"><br><label>z</label><input type="text"
+            id="char-25"><br><label>0</label><input type="text" id="char-26"><br><label>1</label><input type="text"
+            id="char-27"><br><label>2</label><input type="text" id="char-28"><br><label>3</label><input type="text"
+            id="char-29"><br><label>4</label><input type="text" id="char-30"><br><label>5</label><input type="text"
+            id="char-31"><br><label>6</label><input type="text" id="char-32"><br><label>7</label><input type="text"
+            id="char-33"><br><label>8</label><input type="text" id="char-34"><br><label>9</label><input type="text"
+            id="char-35"><br><label>Space</label><input type="text" id="char-36"><br>
+    </div>
+
+    <button onclick="save()">
+        Save
+    </button>
+    <button onclick="reset()">
+        Reset
+    </button>
+    <button onclick="share('code')">
+        share
+    </button>
+
+   
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
