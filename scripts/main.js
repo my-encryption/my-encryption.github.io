@@ -3,6 +3,8 @@
 
 var timeSensitive = false;
 const inputs = document.getElementById('inputs')
+const chat = document.getElementById('chat')
+const sendBtn = document.getElementById('send-btn')
 const encryptInput = document.getElementById('encrypt-input')
 const decryptInput = document.getElementById('decrypt-input')
 var code = localStorage.getItem('code') ? JSON.parse(localStorage.getItem('code')) : [];
@@ -139,6 +141,40 @@ function encrypt() {
         decryptInput.value = encryptArr.join(" ")
     }
     // console.log(encryptArr)
+
+    sendBtn.innerText = 'Link copied'
+
+    // send message to screen
+    toScreen('send')
+
+    encryptInput.value = ''
+
+    //copy link to clipboard
+
+    share('msg')
+}
+
+function toScreen(f) {
+    var p = document.createElement("p")
+
+    
+     // go to left side
+    if(f == 'send') {
+        p.innerHTML = encryptInput.value;
+    }
+    
+    // go to right side
+    else if (f == 'receive'){
+        p.innerHTML = decryptedArr.join("");
+    }
+
+    // var input = document.createElement("input");
+    // input.setAttribute("type", "text");
+    // input.setAttribute("id", 'test');
+
+    chat.appendChild(p);
+    // chat.appendChild(input);
+    chat.appendChild(document.createElement("br"));
 }
 
 function decrypt() {
@@ -177,7 +213,9 @@ function decrypt() {
     }
     // console.log(magic1)
     // console.log(decryptedArr)
-    encryptInput.value = decryptedArr.join("")
+    // encryptInput.value = decryptedArr.join("")
+
+    toScreen('receive')
 }
 
 
@@ -260,6 +298,8 @@ if (getAllUrlParams().msg) {
         decryptInput.value = getAllUrlParams().msg.replace(/%20/g, " ");
 
         decrypt()
+
+        // put in chat
     }
 
     // instead match the same amount of words as the url 
@@ -268,6 +308,7 @@ if (getAllUrlParams().msg) {
         decryptInput.value = getAllUrlParams().msg;
     }
 
+   
     // !!!!!!!!!!!!!!!!!activate this when it's on its own domain
     // window.history.replaceState({}, document.title, "/");
 }
@@ -296,7 +337,7 @@ function share(type) {
         // 'olive%20grey39%20orange1'.replace(/%20/g, " ")
         // console.log('http://127.0.0.1:5500/?msg=' + decryptInput.value.replace(/\s/g, '%20'))
 
-        link = 'https://ashley.how/cypher-maker/?msg=' + decryptInput.value.replace(/\s/g, '%20');
+        link = 'http://localhost:5500/?msg=' + decryptInput.value.replace(/\s/g, '%20');
 
 
 
@@ -313,7 +354,7 @@ function share(type) {
         // console.log('share code url')
         // console.log('http://127.0.0.1:5500/?code=' + code.join("%20"))
 
-        link = 'https://ashley.how/cypher-maker/?code=' + code.join("%20");
+        link = 'http://localhost:5500/?code=' + code.join("%20");
 
         // console.log('http://127.0.0.1:5500/?code=' + getAllUrlParams().code.replace(/\s/g, '%20'))
     }
