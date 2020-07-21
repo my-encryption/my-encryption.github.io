@@ -13,6 +13,8 @@ sans-serif;
 
 body {
     font-family: $primary-font;
+    background: #292929;
+    color: white;
 }
 
 .container {
@@ -28,7 +30,7 @@ body {
 }
 
 .inner-container {
-    width: 80%;
+    width: 100%; //80
     height: 100%;
     // background: blue;
 }
@@ -45,9 +47,15 @@ h1 {
     justify-content: center;
 
     #chat {
-        width: 90%;
+        width: 100%; // 90
+        height: 95%;
         display: flex;
         flex-direction: column;
+        overflow: auto;
+
+        p {
+            padding: 10px;
+        }
 
         .receive {
             width: 40%;
@@ -74,11 +82,16 @@ h1 {
     }
 
     button {
-        width: 8%;
+        width: 33%; // 8
+
         background: green;
         border: 0;
         color: white;
         padding: 10px;
         border-radius: 20px;
     }
+}
+
+textarea {
+    width: 100%;
 }

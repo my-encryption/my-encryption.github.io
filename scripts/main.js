@@ -153,6 +153,7 @@ function encrypt() {
     //copy link to clipboard
 
     share('msg')
+    saveChat()
 }
 
 function toScreen(f) {
@@ -289,6 +290,31 @@ function getAllUrlParams(url) {
     return obj;
 }
 
+
+// if chatHistory exists, bring it up
+// wait, how does it know which is the right and left sides of the chat
+// use a double arr? message then user 0 and 1
+if (localStorage.getItem('chat')) {
+    for (var i = 0; i < chatHistory.length; i++) {
+
+        var p = document.createElement("p")
+
+        // [i][j] if j is 0 send to left. if 1 send to right
+        if (chatHistory[i][1] == 0) {
+            p.innerHTML = chatHistory[i][0];
+            p.setAttribute("class", "send");
+        }
+        else if (chatHistory[i][1] == 1) {
+            p.innerHTML = chatHistory[i][0];
+            p.setAttribute("class", "receive");
+        }
+
+        chat.appendChild(p);
+    }
+}
+
+
+
 // try it out!
 // follow url with ?msg= then type message, using + for spaces
 // console.log(getAllUrlParams().msg)
@@ -384,6 +410,8 @@ function copyStringToClipboard(str) {
 }
 
 function saveChat() {
+    chatHistory = [];
+
     for (var i = 0; i < chat.getElementsByTagName('p').length; i++) {
         // console.log(chat.getElementsByTagName('p')[i].innerText)
 
@@ -402,29 +430,3 @@ function saveChat() {
     console.log(chatHistory)
 }
 
-// if chatHistory exists, bring it up
-// wait, how does it know which is the right and left sides of the chat
-// use a double arr? message then user 0 and 1
-if (localStorage.getItem('chat')) {
-    console.log('chat exists')
-
-    for (var i = 0; i < chatHistory.length; i++) {
-        var j;
-
-        var p = document.createElement("p")
-
-        // [i][j] if j is 0 send to left. if 1 send to right
-        if (chatHistory[i][1] == 0) {
-            p.innerHTML = chatHistory[i][0];
-            p.setAttribute("class", "send");
-        }
-        else if (chatHistory[i][1] == 1) {
-            p.innerHTML = chatHistory[i][0];
-            p.setAttribute("class", "receive");
-        }
-
-        // p.setAttribute("class", "send");
-
-        chat.appendChild(p);
-    }
-}
