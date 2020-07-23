@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="styles/main.min.css">
+
     <title>Document</title>
 </head>
 
@@ -13,34 +14,38 @@
     <!-- <h1>What is a time-sensitive code?</h1>
     <p>Allow your receipient to only view your message at a specific time of the day.</p> -->
 
-    <div class="container">
-        <!-- <div class="sidebar">
-            <h2>Chats</h2>
-            <h3>Chat-1</h3>
-            <h3>Chat-2</h3>
+    <div class="container-wrap">
+        <div class="container">
+            <div class="sidebar">
+                <h2>Chats</h2>
+                <h3>Chat-1</h3>
+                <h3>Chat-2</h3>
 
-            <div class="btn-group">
-                <button>Create new chat</button>
-                <button>Delete all chats</button>
-                <button>Settings</button>
-            </div>
-        </div> -->
-
-        <div class="inner-container">
-            <h1>Chat-1</h1>
-
-            <div class="chat-container">
-                <div id="chat"></div>
+                <div class="btn-group">
+                    <button>Create new chat</button>
+                    <button>Delete all chats</button>
+                    <button>Settings</button>
+                </div>
             </div>
 
-            <div class="msg-bar">
-                <input type="text" placeholder="Type your message" id="encrypt-input" name="message">
-                <button id="send-btn" onclick="encrypt()">
-                    Send
-                </button>
+            <div class="inner-container">
+                <h1>Chat-1</h1>
+
+                <div class="chat-container">
+                    <div id="chat"></div>
+                </div>
+
+                <div class="msg-bar">
+                    <input type="text" placeholder="Type your message" id="encrypt-input" name="message">
+                    <button id="send-btn" onclick="encrypt()">
+                        Send
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
+
 
     <h2>Cryptic</h2>
 
@@ -105,8 +110,6 @@
     <button onclick="share('code')">
         share
     </button>
-
-
 
     <script src="scripts/main.js"></script>
 </body>
