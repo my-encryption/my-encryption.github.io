@@ -10,6 +10,11 @@ const decryptInput = document.getElementById('decrypt-input')
 var code = localStorage.getItem('code') ? JSON.parse(localStorage.getItem('code')) : [];
 var chatHistory = localStorage.getItem('chat') ? JSON.parse(localStorage.getItem('chat')) : [];
 
+var today = new Date();
+var h = today.getHours();
+var m = today.getMinutes();
+var time;
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -54,9 +59,9 @@ function category(type) {
 
 // making sure that url hash starts with '#'
 // e.g. website.com/#5fdsse35tg
-if (window.location.href.indexOf('hey') > 0) {
-    console.log(window.location.href)
-}
+// if (window.location.href.indexOf('hey') > 0) {
+//     console.log(window.location.href)
+// }
 
 // for (var i = 0; i < 37; i++) { // now includes a space
 //     var letter = String.fromCharCode(97 + i);
@@ -92,8 +97,6 @@ function save() {
     for (var i = 0; i < 37; i++) {
         // replace all spaces with hyphen     
         code.push(document.getElementById('char-' + i).value.replace(/ +/g, '-'));
-
-
     }
 
     console.log(code)
@@ -111,7 +114,6 @@ if (localStorage.getItem('code')) {
         document.getElementById('char-' + i).value = JSON.parse(localStorage.getItem('code'))[i];
     }
 }
-
 
 function encrypt() {
     decryptArr = [];
@@ -137,8 +139,6 @@ function encrypt() {
             encryptArr.push(code[letterPos])
         }
 
-        // console.log(letterPos)
-        // console.log(code[letterPos])
         decryptInput.value = encryptArr.join(" ")
     }
     // console.log(encryptArr)
@@ -157,28 +157,33 @@ function encrypt() {
 }
 
 function toScreen(f) {
-    var p = document.createElement("p")
+    var p = document.createElement("p");
+    var span = document.createElement("span");
 
+    if (m < 10) {
+        time = `${h}:0${m}`;
+    } else {
+        time = `${h}:${m}`;
+    }
 
     // go to left side
     if (f == 'send') {
         p.innerHTML = encryptInput.value;
-        p.setAttribute("class", "send");
+        p.setAttribute("class", "message send");
+        span.setAttribute("class", "time send");
     }
 
     // go to right side
     else if (f == 'receive') {
         p.innerHTML = decryptedArr.join("");
-        p.setAttribute("class", "receive");
+        p.setAttribute("class", "message receive");
+        span.setAttribute("class", "time receive");
     }
 
-    // var input = document.createElement("input");
-    // input.setAttribute("type", "text");
-    // input.setAttribute("id", 'test');
+    span.innerHTML = time;
 
     chat.appendChild(p);
-    // chat.appendChild(input);
-    // chat.appendChild(document.createElement("br"));
+    chat.appendChild(span);
 }
 
 function decrypt() {
@@ -298,18 +303,23 @@ if (localStorage.getItem('chat')) {
     for (var i = 0; i < chatHistory.length; i++) {
 
         var p = document.createElement("p")
+        var span = document.createElement("span")
 
-        // [i][j] if j is 0 send to left. if 1 send to right
-        if (chatHistory[i][1] == 0) {
-            p.innerHTML = chatHistory[i][0];
-            p.setAttribute("class", "send");
+        if (chatHistory[i][0] == 0) {
+            p.innerHTML = chatHistory[i][1];
+            p.setAttribute("class", "message send");
+            span.innerHTML = chatHistory[i][2];
+            span.setAttribute("class", "time send");
         }
-        else if (chatHistory[i][1] == 1) {
-            p.innerHTML = chatHistory[i][0];
-            p.setAttribute("class", "receive");
+        else if (chatHistory[i][0] == 1) {
+            p.innerHTML = chatHistory[i][1];
+            p.setAttribute("class", "message receive");
+            span.innerHTML = chatHistory[i][2];
+            span.setAttribute("class", "time receive");
         }
 
         chat.appendChild(p);
+        chat.appendChild(span);
     }
 }
 
@@ -327,7 +337,7 @@ if (getAllUrlParams().msg) {
         decryptInput.value = getAllUrlParams().msg.replace(/%20/g, " ");
 
         decrypt()
-
+        saveChat()
         // put in chat
     }
 
@@ -339,7 +349,7 @@ if (getAllUrlParams().msg) {
 
 
     // !!!!!!!!!!!!!!!!!activate this when it's on its own domain
-    // window.history.replaceState({}, document.title, "/");
+     window.history.replaceState({}, document.title, "/");
 }
 
 if (getAllUrlParams().code) {
@@ -415,13 +425,16 @@ function saveChat() {
     for (var i = 0; i < chat.getElementsByTagName('p').length; i++) {
         // console.log(chat.getElementsByTagName('p')[i].innerText)
 
-        if (chat.getElementsByTagName('p')[i].className == 'send') {
+        // send
+        if (chat.getElementsByTagName('p')[i].className == 'message send') {
             //write a double arr with 0 (main user)
-            chatHistory.push([chat.getElementsByTagName('p')[i].innerText, 0])
+            // chatHistory.push([chat.getElementsByTagName('p')[i].innerText, 0])
+            chatHistory.push([0, chat.getElementsByTagName('p')[i].innerText, chat.getElementsByTagName('span')[i].innerText])
         }
+        // recieve
         else {
             //write a double arr with 1 (other user)
-            chatHistory.push([chat.getElementsByTagName('p')[i].innerText, 1])
+            chatHistory.push([1, chat.getElementsByTagName('p')[i].innerText, chat.getElementsByTagName('span')[i].innerText])
         }
 
 
