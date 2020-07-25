@@ -34,6 +34,8 @@
             <div class="sidebar">
                 <h2>Chats</h2>
                 <h3>Chat-1</h3>
+                <span id="chat-1-preview-text"></span>
+                <span id="chat-1-preview-time"></span>
                 <h3>Chat-2</h3>
 
                 <div class="btn-group">
@@ -43,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="inner-container">
+            <div class="inner-container" id="screen-chat">
                 <h1>Chat-1</h1>
 
                 <div class="chat-settings-toggle">
@@ -64,12 +66,93 @@
                     </button>
                 </div>
             </div>
+
+            <div class="inner-container" id="screen-add">
+                <h1>Create a chat</h1>
+
+                <div class="chat-settings-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M12 18c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z" />
+                    </svg>
+                </div>
+<!-- 
+                <div id="decrypt">
+                    <textarea id="decrypt-input" rows="5" cols="60" name="description"></textarea>
+                </div> -->
+<!-- 
+                <button onclick="decrypt()">
+                    decrypt
+                </button>
+
+                <button onclick="share('msg')">
+                    share
+                </button>
+
+                <p>message copied to clipboard</p> -->
+
+
+                <p>Create your own, or choose from a template below:</p>
+                <ul>
+                    <li><button onclick="category('animals')">Animals</button></li>
+                    <li><button onclick="category('colours')">Colours</button></li>
+                </ul>
+
+                <div id="key">
+
+                    <div class="col-1" id="letters">
+                        <label>a</label><input type="text" id="char-0"><br><label>b</label><input type="text"
+                            id="char-1"><br><label>c</label><input type="text" id="char-2"><br><label>d</label><input
+                            type="text" id="char-3"><br><label>e</label><input type="text"
+                            id="char-4"><br><label>f</label><input type="text" id="char-5"><br><label>g</label><input
+                            type="text" id="char-6"><br><label>h</label><input type="text"
+                            id="char-7"><br><label>i</label><input type="text" id="char-8"><br><label>j</label><input
+                            type="text" id="char-9"><br><label>k</label><input type="text"
+                            id="char-10"><br><label>l</label><input type="text" id="char-11"><br><label>m</label><input
+                            type="text" id="char-12"><br><label>n</label><input type="text"
+                            id="char-13"><br><label>o</label><input type="text" id="char-14"><br><label>p</label><input
+                            type="text" id="char-15"><br><label>q</label><input type="text"
+                            id="char-16"><br><label>r</label><input type="text" id="char-17"><br><label>s</label><input
+                            type="text" id="char-18"><br><label>t</label><input type="text"
+                            id="char-19"><br><label>u</label><input type="text" id="char-20"><br><label>v</label><input
+                            type="text" id="char-21"><br><label>w</label><input type="text"
+                            id="char-22"><br><label>x</label><input type="text" id="char-23"><br><label>y</label><input
+                            type="text" id="char-24"><br><label>z</label><input type="text" id="char-25"><br>
+                    </div>
+
+                    <div class="col-2" id="numbers">
+                        <label>0</label><input type="text" id="char-26"><br><label>1</label><input type="text"
+                            id="char-27"><br><label>2</label><input type="text" id="char-28"><br><label>3</label><input
+                            type="text" id="char-29"><br><label>4</label><input type="text"
+                            id="char-30"><br><label>5</label><input type="text" id="char-31"><br><label>6</label><input
+                            type="text" id="char-32"><br><label>7</label><input type="text"
+                            id="char-33"><br><label>8</label><input type="text" id="char-34"><br><label>9</label><input
+                            type="text" id="char-35"><br><label>Space</label><input type="text" id="char-36"><br>
+                    </div>
+
+                </div>
+
+                <button onclick="save()">
+                    Save
+                </button>
+                <button onclick="reset()">
+                    Reset
+                </button>
+                <button onclick="share('code')">
+                    share
+                </button>
+
+
+
+            </div>
+
+
         </div>
     </div>
 
 
 
-    <h2>Cryptic</h2>
+    <!-- <h2>Cryptic</h2> -->
 
     <!-- <div id="encrypt">
         <textarea id="encrypt-input" rows="5" cols="60" name="description"></textarea>
@@ -81,57 +164,6 @@
         </button>
     </div> -->
 
-    <div id="decrypt">
-        <textarea id="decrypt-input" rows="5" cols="60" name="description"></textarea>
-    </div>
-
-    <button onclick="decrypt()">
-        decrypt
-    </button>
-
-    <button onclick="share('msg')">
-        share
-    </button>
-
-    <p>message copied to clipboard</p>
-
-
-    <p>Create your own, or choose from a template below:</p>
-    <ul>
-        <li><button onclick="category('animals')">Animals</button></li>
-        <li><button onclick="category('colours')">Colours</button></li>
-    </ul>
-
-    <div id="inputs"><label>a</label><input type="text" id="char-0"><br><label>b</label><input type="text"
-            id="char-1"><br><label>c</label><input type="text" id="char-2"><br><label>d</label><input type="text"
-            id="char-3"><br><label>e</label><input type="text" id="char-4"><br><label>f</label><input type="text"
-            id="char-5"><br><label>g</label><input type="text" id="char-6"><br><label>h</label><input type="text"
-            id="char-7"><br><label>i</label><input type="text" id="char-8"><br><label>j</label><input type="text"
-            id="char-9"><br><label>k</label><input type="text" id="char-10"><br><label>l</label><input type="text"
-            id="char-11"><br><label>m</label><input type="text" id="char-12"><br><label>n</label><input type="text"
-            id="char-13"><br><label>o</label><input type="text" id="char-14"><br><label>p</label><input type="text"
-            id="char-15"><br><label>q</label><input type="text" id="char-16"><br><label>r</label><input type="text"
-            id="char-17"><br><label>s</label><input type="text" id="char-18"><br><label>t</label><input type="text"
-            id="char-19"><br><label>u</label><input type="text" id="char-20"><br><label>v</label><input type="text"
-            id="char-21"><br><label>w</label><input type="text" id="char-22"><br><label>x</label><input type="text"
-            id="char-23"><br><label>y</label><input type="text" id="char-24"><br><label>z</label><input type="text"
-            id="char-25"><br><label>0</label><input type="text" id="char-26"><br><label>1</label><input type="text"
-            id="char-27"><br><label>2</label><input type="text" id="char-28"><br><label>3</label><input type="text"
-            id="char-29"><br><label>4</label><input type="text" id="char-30"><br><label>5</label><input type="text"
-            id="char-31"><br><label>6</label><input type="text" id="char-32"><br><label>7</label><input type="text"
-            id="char-33"><br><label>8</label><input type="text" id="char-34"><br><label>9</label><input type="text"
-            id="char-35"><br><label>Space</label><input type="text" id="char-36"><br>
-    </div>
-
-    <button onclick="save()">
-        Save
-    </button>
-    <button onclick="reset()">
-        Reset
-    </button>
-    <button onclick="share('code')">
-        share
-    </button>
 
     <script src="scripts/main.js"></script>
 </body>

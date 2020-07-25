@@ -7,6 +7,7 @@ const chat = document.getElementById('chat')
 const sendBtn = document.getElementById('send-btn')
 const encryptInput = document.getElementById('encrypt-input')
 const decryptInput = document.getElementById('decrypt-input')
+var decrypted;
 var code = localStorage.getItem('code') ? JSON.parse(localStorage.getItem('code')) : [];
 var chatHistory = localStorage.getItem('chat') ? JSON.parse(localStorage.getItem('chat')) : [];
 
@@ -119,41 +120,50 @@ function encrypt() {
     decryptArr = [];
     encryptArr = [];
 
-    for (var i = 0; i < encryptInput.value.length; i++) {
-        //take each letter, convert it into code, then spit out the output
-        // or use .replace() 
-        // 'word'.charCodeAt() - 97
-        // var letter = String.fromCharCode(97 + i);
+    if (encryptInput.value != '') {
+        for (var i = 0; i < encryptInput.value.length; i++) {
+            //take each letter, convert it into code, then spit out the output
+            // or use .replace() 
+            // 'word'.charCodeAt() - 97
+            // var letter = String.fromCharCode(97 + i);
 
-        var letterPos = encryptInput.value[i].charCodeAt() - 97;
+            var letterPos = encryptInput.value[i].charCodeAt() - 97;
 
-        // -65 is a space
-        if (letterPos == -65) {
-            encryptArr.push(code[36])
-        }
-        // numbers from -49 to -40
-        else if (letterPos >= -49 && letterPos <= -40) {
-            encryptArr.push(code[letterPos + 75])
-        }
-        else {
-            encryptArr.push(code[letterPos])
-        }
+            // -65 is a space
+            if (letterPos == -65) {
+                encryptArr.push(code[36])
+            }
+            // numbers from -49 to -40
+            else if (letterPos >= -49 && letterPos <= -40) {
+                encryptArr.push(code[letterPos + 75])
+            }
+            else {
+                encryptArr.push(code[letterPos])
+            }
 
-        decryptInput.value = encryptArr.join(" ")
+            decrypted = encryptArr.join(" ")
+        }
+        // console.log(encryptArr)
+
+        sendBtn.innerText = 'Link copied'
+
+        // send message to screen
+        toScreen('send')
+        updateChatPreview()
+
+        encryptInput.value = ''
+
+        //copy link to clipboard
+
+        share('msg')
+        saveChat()
     }
-    // console.log(encryptArr)
+}
 
-    sendBtn.innerText = 'Link copied'
 
-    // send message to screen
-    toScreen('send')
-
-    encryptInput.value = ''
-
-    //copy link to clipboard
-
-    share('msg')
-    saveChat()
+function updateChatPreview() {
+    document.getElementById('chat-1-preview-text').innerHTML = encryptInput.value;
+    document.getElementById('chat-1-preview-time').innerHTML = time;
 }
 
 function toScreen(f) {
@@ -193,10 +203,10 @@ function decrypt() {
     // take encrypted value
     // code.indexOf("Blue")
 
-    // for (var i=0;i<decryptInput.value.split(' ').length;i++){
-    // var letterPos = decryptInput.value[i].charCodeAt() - 97;
+    // for (var i=0;i<decrypted.split(' ').length;i++){
+    // var letterPos = decrypted[i].charCodeAt() - 97;
     // console.log(letterPos)
-    decryptArr.push(decryptInput.value.split(' '))
+    decryptArr.push(decrypted.split(' '))
     // console.log(String.fromCharCode(97 + i))
     // }
 
@@ -320,6 +330,11 @@ if (localStorage.getItem('chat')) {
 
         chat.appendChild(p);
         chat.appendChild(span);
+
+
+        // update chat preview
+        document.getElementById('chat-1-preview-text').innerHTML = chatHistory[chatHistory.length - 1][1]
+        document.getElementById('chat-1-preview-time').innerHTML = chatHistory[chatHistory.length - 1][2]
     }
 }
 
@@ -334,7 +349,7 @@ if (getAllUrlParams().msg) {
     if (localStorage.getItem('code')) {
         // dont bother putting it in the decrypt input, just convert subito
         // console.log("there's a msg in the URL")
-        decryptInput.value = getAllUrlParams().msg.replace(/%20/g, " ");
+        decrypted = getAllUrlParams().msg.replace(/%20/g, " ");
 
         decrypt()
         saveChat()
@@ -344,12 +359,12 @@ if (getAllUrlParams().msg) {
     // instead match the same amount of words as the url 
     else {
         encryptInput.value = "Don't be nosy.";
-        decryptInput.value = getAllUrlParams().msg;
+        decrypted = getAllUrlParams().msg;
     }
 
 
     // !!!!!!!!!!!!!!!!!activate this when it's on its own domain
-     window.history.replaceState({}, document.title, "/");
+    window.history.replaceState({}, document.title, "/");
 }
 
 if (getAllUrlParams().code) {
@@ -374,9 +389,9 @@ function share(type) {
     if (type == 'msg') {
         // this is the opposite
         // 'olive%20grey39%20orange1'.replace(/%20/g, " ")
-        // console.log('http://127.0.0.1:5500/?msg=' + decryptInput.value.replace(/\s/g, '%20'))
+        // console.log('http://127.0.0.1:5500/?msg=' + decrypted.replace(/\s/g, '%20'))
 
-        link = 'https://my-encryption.github.io/?msg=' + decryptInput.value.replace(/\s/g, '%20');
+        link = 'https://my-encryption.github.io/?msg=' + decrypted.replace(/\s/g, '%20');
 
 
 
@@ -443,3 +458,4 @@ function saveChat() {
     console.log(chatHistory)
 }
 
+// update chat preview (sidebar)
