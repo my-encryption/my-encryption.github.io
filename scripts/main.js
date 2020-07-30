@@ -27,7 +27,7 @@ function category(type) {
     var url;
 
     if (type == 'animals') {
-        url = 'https://ashley.how/cypher-maker/scripts/animalList.json'
+        url = 'scripts/animalList.json'
     }
     else if (type == 'colours') {
         url = 'https://jonasjacek.github.io/colors/data.json'
@@ -120,6 +120,13 @@ function encrypt() {
     decryptArr = [];
     encryptArr = [];
 
+    // here remove last chat and pop array
+    if (chatHistory[chatHistory.length - 1][0] == 0) {
+        chat.removeChild(chat.childNodes[chat.children.length - 1]);
+        chat.removeChild(chat.childNodes[chat.children.length - 1]);
+        chatHistory.pop();
+    }
+
     if (encryptInput.value != '') {
         for (var i = 0; i < encryptInput.value.length; i++) {
             //take each letter, convert it into code, then spit out the output
@@ -145,7 +152,9 @@ function encrypt() {
         }
         // console.log(encryptArr)
 
-        sendBtn.innerText = 'Link copied'
+        sendBtn.innerText = 'Copied to clipboard'
+        encryptInput.placeholder = "Type another message to replace"
+        // setTimeout(function () { sendBtn.innerText = 'Replace text'; }, 3000);
 
         // send message to screen
         toScreen('send')
@@ -158,6 +167,7 @@ function encrypt() {
         share('msg')
         saveChat()
     }
+
 }
 
 
@@ -336,6 +346,11 @@ if (localStorage.getItem('chat')) {
         document.getElementById('chat-1-preview-text').innerHTML = chatHistory[chatHistory.length - 1][1]
         document.getElementById('chat-1-preview-time').innerHTML = chatHistory[chatHistory.length - 1][2]
     }
+
+    // here goes change placeholder if last message sent by you
+    if (chatHistory[chatHistory.length - 1][0] == 0) {
+        encryptInput.placeholder = 'Type another message to replace'
+    }
 }
 
 
@@ -458,4 +473,23 @@ function saveChat() {
     console.log(chatHistory)
 }
 
-// update chat preview (sidebar)
+
+
+// Execute a function when the user releases a key on the keyboard
+encryptInput.addEventListener("keyup", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        sendBtn.click();
+
+        // then focus on the input box
+        encryptInput.focus();
+        encryptInput.select();
+    }
+});
+
+function updateBtn() {
+    sendBtn.innerText = "Send"
+}
