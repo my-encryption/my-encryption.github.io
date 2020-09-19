@@ -121,10 +121,17 @@ function encrypt() {
     encryptArr = [];
 
     // here remove last chat and pop array
-    if (chatHistory[chatHistory.length - 1][0] == 0) {
-        chat.removeChild(chat.childNodes[chat.children.length - 1]);
-        chat.removeChild(chat.childNodes[chat.children.length - 1]);
-        chatHistory.pop();
+    // if (chatHistory[chatHistory.length - 1][0]) {
+    //     chat.removeChild(chat.childNodes[chat.children.length - 1]);
+    //     chat.removeChild(chat.childNodes[chat.children.length - 1]);
+    //     chatHistory.pop();
+    // }
+    if (chatHistory.length > 0) {
+        if (chatHistory[chatHistory.length - 1][0] == 0) {
+            chat.removeChild(chat.childNodes[chat.children.length - 1]);
+            chat.removeChild(chat.childNodes[chat.children.length - 1]);
+            chatHistory.pop();
+        }
     }
 
     if (encryptInput.value != '') {
@@ -406,7 +413,8 @@ function share(type) {
         // 'olive%20grey39%20orange1'.replace(/%20/g, " ")
         // console.log('http://127.0.0.1:5500/?msg=' + decrypted.replace(/\s/g, '%20'))
 
-        link = 'https://my-encryption.github.io/?msg=' + decrypted.replace(/\s/g, '%20');
+        // link = 'https://my-encryption.github.io/?msg=' + decrypted.replace(/\s/g, '%20');
+        link = '127.0.0.1:5500/?msg=' + decrypted.replace(/\s/g, '%20');
 
 
 
@@ -423,7 +431,8 @@ function share(type) {
         // console.log('share code url')
         // console.log('http://127.0.0.1:5500/?code=' + code.join("%20"))
 
-        link = 'https://my-encryption.github.io/?code=' + code.join("%20");
+        // link = 'https://my-encryption.github.io/?code=' + code.join("%20");
+        link = '127.0.0.1:5500/?code=' + code.join("%20");
 
         // console.log('http://127.0.0.1:5500/?code=' + getAllUrlParams().code.replace(/\s/g, '%20'))
     }
