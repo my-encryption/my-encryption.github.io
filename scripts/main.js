@@ -502,3 +502,16 @@ encryptInput.addEventListener("keyup", function (event) {
 function updateBtn() {
     sendBtn.innerText = "Send"
 }
+
+function downloadChat() {
+    var title = document.getElementById('screen-chat').getElementsByTagName("h1")[0].innerText;
+    var preface = `\n0 = you, 1 = not you \n\n`;
+    var content = chatHistory.map(x => `${x[2]} - ${x[0]}: ${x[1]}\n`).join("")
+
+    var a = document.body.appendChild(
+        document.createElement("a")
+    );
+    a.download = "chat.txt";
+    a.href = "data:text/txt," + (title + preface + content);
+    a.click();
+}
