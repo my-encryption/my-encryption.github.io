@@ -442,7 +442,7 @@ function share(type) {
         // link = 'https://my-encryption.github.io/?code=' + code.join("%20");
         link = '127.0.0.1:5500/?code=' + code.join("%20");
         document.getElementById('share-link').innerText = 'Copied to clipboard';
-        setTimeout(function () { document.getElementById('share-link').innerText = 'Share chat'; }, 3000);
+        setTimeout(function () { document.getElementById('share-link').innerText = 'Share chat key'; }, 3000);
 
 
 
