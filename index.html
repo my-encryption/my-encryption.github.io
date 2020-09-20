@@ -39,7 +39,7 @@
                 <h3>Chat-2</h3>
 
                 <div class="btn-group">
-                    <button id="download-chat" onclick="downloadChat()">Download chat</button>
+                    <!-- <button id="download-chat" onclick="downloadChat()">Download chat</button> -->
                     <button id="create-new-chat" onclick="createNewChat()">Create new chat</button>
                     <button id="delete-all-chats" class="danger" onclick="deleteAllChats()">Delete all chats</button>
                     <button id="settings" onclick="settings()">Settings</button>
@@ -61,10 +61,23 @@
                 </div>
 
                 <div class="msg-bar">
-                    <input type="text" placeholder="Type your message" id="encrypt-input" name="message" oninput="updateBtn()">
+                    <input type="text" placeholder="Type your message" id="encrypt-input" name="message"
+                        oninput="updateBtn()">
                     <button id="send-btn" class="success" onclick="encrypt()">
                         Send
                     </button>
+                </div>
+
+                <div class="chat-menu">
+                    <ul>
+                        <li>Rename chat</li>
+                        <li id="share-link" onclick="share('code')">Share chat</li>
+                        <li onclick="downloadChat()">Download chat (.txt)</li>
+                        <li>Delete chat</li>
+                        <hr>
+                        <li>Keep messages: on</li>
+                        <li>Clear messages</li>
+                    </ul>
                 </div>
             </div>
 
@@ -77,11 +90,11 @@
                             d="M12 18c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z" />
                     </svg>
                 </div>
-<!-- 
+                <!-- 
                 <div id="decrypt">
                     <textarea id="decrypt-input" rows="5" cols="60" name="description"></textarea>
                 </div> -->
-<!-- 
+                <!-- 
                 <button onclick="decrypt()">
                     decrypt
                 </button>

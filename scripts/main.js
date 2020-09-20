@@ -423,24 +423,28 @@ function share(type) {
         // link = 'https://my-encryption.github.io/?msg=' + decrypted.replace(/\s/g, '%20');
         link = '127.0.0.1:5500/?msg=' + decrypted.replace(/\s/g, '%20');
 
-
-
+        
+        
         // /* Select the text field */
         // decryptInput.select();
         // decryptInput.setSelectionRange(0, 99999); /*For mobile devices*/
-
+        
         // /* Copy the text inside the text field */
         // document.execCommand("copy");
-
+        
     }
-
+    
     else if (type == 'code') {
         // console.log('share code url')
         // console.log('http://127.0.0.1:5500/?code=' + code.join("%20"))
-
+        
         // link = 'https://my-encryption.github.io/?code=' + code.join("%20");
         link = '127.0.0.1:5500/?code=' + code.join("%20");
+        document.getElementById('share-link').innerText = 'Copied to clipboard';
+        setTimeout(function(){ document.getElementById('share-link').innerText = 'Share chat'; }, 3000);
 
+
+        
         // console.log('http://127.0.0.1:5500/?code=' + getAllUrlParams().code.replace(/\s/g, '%20'))
     }
 

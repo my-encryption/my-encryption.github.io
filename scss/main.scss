@@ -190,6 +190,10 @@ nav {
     right: 0;
     fill: white;
     padding: 25px;
+
+    svg {
+        cursor: pointer;
+    }
 }
 
 .btn-group {
@@ -209,4 +213,18 @@ nav {
 
 #key {
     display: flex;
+}
+
+.chat-menu {
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    background: #3d3d3d;
+    width: 200px;
+    text-align: center;
+
+    li {
+        cursor: pointer;
+        margin: 15px 0;
+    }
 }
