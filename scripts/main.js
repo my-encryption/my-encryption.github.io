@@ -29,6 +29,9 @@ function category(type) {
     if (type == 'animals') {
         url = 'scripts/animalList.json'
     }
+    if (type == 'lorem') {
+        url = 'scripts/lorem.json'
+    }
     else if (type == 'colours') {
         url = 'https://jonasjacek.github.io/colors/data.json'
     }
