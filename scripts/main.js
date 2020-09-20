@@ -43,7 +43,7 @@ function category(type) {
 
             shuffleArray(data)
 
-            for (i = 0; i < 37; i++) {
+            for (i = 0; i < 63; i++) {
                 var charPos = document.getElementById('char-' + i);
 
                 if (type == 'colours') {
@@ -99,7 +99,7 @@ function save() {
     if (localStorage.getItem('code')) {
         code = [];
     }
-    for (var i = 0; i < 37; i++) {
+    for (var i = 0; i < 63; i++) {
         // replace all spaces with hyphen     
         code.push(document.getElementById('char-' + i).value.replace(/ +/g, '-'));
     }
@@ -115,7 +115,7 @@ function reset() {
 // if code is written in local storage, retrieve it and fill in inputs.
 
 if (localStorage.getItem('code')) {
-    for (var i = 0; i < 37; i++) {
+    for (var i = 0; i < 63; i++) {
         document.getElementById('char-' + i).value = JSON.parse(localStorage.getItem('code'))[i];
     }
 }
@@ -128,12 +128,6 @@ function encrypt() {
     h = today.getHours();
     m = today.getMinutes();
 
-    // here remove last chat and pop array
-    // if (chatHistory[chatHistory.length - 1][0]) {
-    //     chat.removeChild(chat.childNodes[chat.children.length - 1]);
-    //     chat.removeChild(chat.childNodes[chat.children.length - 1]);
-    //     chatHistory.pop();
-    // }
     if (chatHistory.length > 0) {
         if (chatHistory[chatHistory.length - 1][0] == 0) {
             chat.removeChild(chat.childNodes[chat.children.length - 1]);
@@ -158,6 +152,10 @@ function encrypt() {
             // numbers from -49 to -40
             else if (letterPos >= -49 && letterPos <= -40) {
                 encryptArr.push(code[letterPos + 75])
+            }
+            // capital letters
+            else if(letterPos >= -32 && letterPos <= -6){
+                encryptArr.push(code[letterPos + 69])
             }
             else {
                 encryptArr.push(code[letterPos])
@@ -247,8 +245,13 @@ function decrypt() {
         if (code.indexOf(decryptArr[0][i]) == 36) {
             decryptedArr.push(" ")
         }
+        //numbers
         else if (code.indexOf(decryptArr[0][i]) >= 26 && code.indexOf(decryptArr[0][i]) <= 35) {
             decryptedArr.push(String.fromCharCode(22 + code.indexOf(decryptArr[0][i])))
+        }
+        //capital letters
+        else if (code.indexOf(decryptArr[0][i]) >= 35 && code.indexOf(decryptArr[0][i]) <= 62) {
+            decryptedArr.push(String.fromCharCode(28 + code.indexOf(decryptArr[0][i])))
         }
         else {
             decryptedArr.push(String.fromCharCode(97 + code.indexOf(decryptArr[0][i])))
