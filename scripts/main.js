@@ -120,6 +120,10 @@ function encrypt() {
     decryptArr = [];
     encryptArr = [];
 
+    today = new Date();
+    h = today.getHours();
+    m = today.getMinutes();
+
     // here remove last chat and pop array
     // if (chatHistory[chatHistory.length - 1][0]) {
     //     chat.removeChild(chat.childNodes[chat.children.length - 1]);
