@@ -49,7 +49,7 @@
             <div class="inner-container" id="screen-chat">
                 <h1>Chat-1</h1>
 
-                <div class="chat-settings-toggle">
+                <div id="chat-settings-toggle" onclick="openChatMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M12 18c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z" />
@@ -68,10 +68,10 @@
                     </button>
                 </div>
 
-                <div class="chat-menu">
+                <div id="chat-menu" class="closed">
                     <ul>
                         <li>Rename chat</li>
-                        <li id="share-link" onclick="share('code')">Share chat</li>
+                        <li id="share-link" onclick="share('code')">Share chat key</li>
                         <li onclick="downloadChat()">Download chat (.txt)</li>
                         <li>Delete chat</li>
                         <hr>
@@ -84,12 +84,13 @@
             <div class="inner-container" id="screen-add">
                 <h1>Create a chat</h1>
 
-                <div class="chat-settings-toggle">
+                <!-- <div class="chat-settings-toggle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path
                             d="M12 18c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0-9c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z" />
                     </svg>
-                </div>
+                </div> -->
+
                 <!-- 
                 <div id="decrypt">
                     <textarea id="decrypt-input" rows="5" cols="60" name="description"></textarea>
@@ -154,7 +155,7 @@
                     Reset
                 </button>
                 <button onclick="share('code')">
-                    share
+                    Share
                 </button>
 
 

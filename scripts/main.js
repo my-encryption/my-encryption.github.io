@@ -7,6 +7,7 @@ const chat = document.getElementById('chat')
 const sendBtn = document.getElementById('send-btn')
 const encryptInput = document.getElementById('encrypt-input')
 const decryptInput = document.getElementById('decrypt-input')
+const chatMenu = document.getElementById('chat-menu')
 var decrypted;
 var code = localStorage.getItem('code') ? JSON.parse(localStorage.getItem('code')) : [];
 var chatHistory = localStorage.getItem('chat') ? JSON.parse(localStorage.getItem('chat')) : [];
@@ -423,28 +424,28 @@ function share(type) {
         // link = 'https://my-encryption.github.io/?msg=' + decrypted.replace(/\s/g, '%20');
         link = '127.0.0.1:5500/?msg=' + decrypted.replace(/\s/g, '%20');
 
-        
-        
+
+
         // /* Select the text field */
         // decryptInput.select();
         // decryptInput.setSelectionRange(0, 99999); /*For mobile devices*/
-        
+
         // /* Copy the text inside the text field */
         // document.execCommand("copy");
-        
+
     }
-    
+
     else if (type == 'code') {
         // console.log('share code url')
         // console.log('http://127.0.0.1:5500/?code=' + code.join("%20"))
-        
+
         // link = 'https://my-encryption.github.io/?code=' + code.join("%20");
         link = '127.0.0.1:5500/?code=' + code.join("%20");
         document.getElementById('share-link').innerText = 'Copied to clipboard';
-        setTimeout(function(){ document.getElementById('share-link').innerText = 'Share chat'; }, 3000);
+        setTimeout(function () { document.getElementById('share-link').innerText = 'Share chat'; }, 3000);
 
 
-        
+
         // console.log('http://127.0.0.1:5500/?code=' + getAllUrlParams().code.replace(/\s/g, '%20'))
     }
 
@@ -525,4 +526,16 @@ function downloadChat() {
     a.download = "chat.txt";
     a.href = "data:text/txt," + (title + preface + content);
     a.click();
+}
+
+function openChatMenu() {
+    if (chatMenu.className == 'closed') {
+        chatMenu.style.display = 'block';
+        chatMenu.classList.add("opened")
+        chatMenu.classList.remove("closed")
+    } else {
+        chatMenu.style.display = 'none';
+        chatMenu.classList.add("closed")
+        chatMenu.classList.remove("opened")
+    }
 }

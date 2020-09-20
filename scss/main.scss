@@ -185,7 +185,7 @@ nav {
     }
 }
 
-.chat-settings-toggle {
+#chat-settings-toggle {
     position: absolute;
     right: 0;
     fill: white;
@@ -215,7 +215,8 @@ nav {
     display: flex;
 }
 
-.chat-menu {
+#chat-menu {
+    display: none;
     position: absolute;
     right: 30px;
     top: 60px;
