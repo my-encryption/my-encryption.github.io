@@ -43,7 +43,7 @@ function category(type) {
 
             shuffleArray(data)
 
-            for (i = 0; i < 63; i++) {
+            for (i = 0; i < 70; i++) {
                 var charPos = document.getElementById('char-' + i);
 
                 if (type == 'colours') {
@@ -99,7 +99,7 @@ function save() {
     if (localStorage.getItem('code')) {
         code = [];
     }
-    for (var i = 0; i < 63; i++) {
+    for (var i = 0; i < 70; i++) {
         // replace all spaces with hyphen     
         code.push(document.getElementById('char-' + i).value.replace(/ +/g, '-'));
     }
@@ -115,7 +115,7 @@ function reset() {
 // if code is written in local storage, retrieve it and fill in inputs.
 
 if (localStorage.getItem('code')) {
-    for (var i = 0; i < 63; i++) {
+    for (var i = 0; i < 70; i++) {
         document.getElementById('char-' + i).value = JSON.parse(localStorage.getItem('code'))[i];
     }
 }
